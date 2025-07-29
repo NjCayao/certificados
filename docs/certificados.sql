@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2025 a las 08:24:29
+-- Tiempo de generación: 29-07-2025 a las 03:49:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -40,37 +40,8 @@ CREATE TABLE `td_curso_usuario` (
 --
 
 INSERT INTO `td_curso_usuario` (`curd_id`, `cur_id`, `usu_id`, `fech_crea`, `est`) VALUES
-(1, 0, 1, '2024-07-21 11:29:30', 1),
-(2, 0, 1, '2024-07-21 11:29:35', 1),
-(3, 1, 1, '2024-07-21 11:46:58', 1),
-(4, 2, 4, '2024-09-18 18:14:35', 1),
-(5, 3, 4, '2024-09-20 02:58:16', 1),
-(6, 3, 2, '2024-09-20 03:36:52', 1),
-(7, 4, 6, '2024-09-23 20:57:13', 1),
-(8, 4, 15, '2024-10-16 16:02:27', 1),
-(9, 2, 15, '2024-10-16 16:34:41', 1),
-(10, 2, 11, '2024-10-17 19:30:41', 1),
-(11, 4, 24, '2024-11-18 17:05:20', 1),
-(12, 4, 132, '2024-11-19 00:54:48', 1),
-(13, 4, 131, '2024-11-19 01:29:29', 0),
-(14, 5, 137, '2024-11-19 18:09:04', 1),
-(15, 4, 129, '2024-11-29 16:24:58', 1),
-(16, 5, 1, '2024-12-16 18:24:28', 1),
-(17, 6, 1, '2024-12-16 18:26:41', 1),
-(18, 6, 138, '2024-12-16 18:30:31', 1),
-(19, 7, 138, '2024-12-16 18:35:31', 1),
-(20, 8, 1, '2024-12-17 11:25:13', 1),
-(21, 9, 1, '2024-12-17 11:27:23', 1),
-(22, 8, 138, '2024-12-17 11:29:21', 1),
-(23, 9, 138, '2025-01-09 10:07:42', 1),
-(24, 4, 138, '2025-01-09 10:11:23', 1),
-(25, 4, 1, '2025-01-09 10:11:23', 1),
-(26, 10, 138, '2025-01-09 10:20:54', 1),
-(27, 10, 1, '2025-01-09 10:20:54', 1),
-(28, 11, 138, '2025-05-09 14:37:33', 1),
-(29, 11, 1, '2025-05-09 14:37:33', 1),
-(30, 12, 138, '2025-05-16 20:25:10', 1),
-(31, 12, 139, '2025-06-20 18:20:26', 1);
+(34, 12, 139, '2025-07-28 18:33:09', 1),
+(35, 13, 138, '2025-07-28 18:43:35', 1);
 
 -- --------------------------------------------------------
 
@@ -134,6 +105,7 @@ CREATE TABLE `tm_curso` (
   `cur_descrip` varchar(1000) NOT NULL,
   `cur_fechini` date DEFAULT NULL,
   `cur_fechfin` date DEFAULT NULL,
+  `cur_fecha_vencimiento` date DEFAULT NULL,
   `inst_id` int(11) NOT NULL,
   `cur_img` varchar(250) DEFAULT NULL,
   `fech_crea` datetime DEFAULT NULL,
@@ -144,8 +116,9 @@ CREATE TABLE `tm_curso` (
 -- Volcado de datos para la tabla `tm_curso`
 --
 
-INSERT INTO `tm_curso` (`cur_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fechini`, `cur_fechfin`, `inst_id`, `cur_img`, `fech_crea`, `est`) VALUES
-(12, 2, 'CURSO PRUEBA', '60', '2024-01-15', '2025-01-15', 1, '../../public/1652394609.png', '2025-05-16 20:24:47', 1);
+INSERT INTO `tm_curso` (`cur_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fechini`, `cur_fechfin`, `cur_fecha_vencimiento`, `inst_id`, `cur_img`, `fech_crea`, `est`) VALUES
+(12, 2, 'CURSO PRUEBA', '60', '2024-01-15', '2025-01-15', NULL, 1, '../../public/137813702.png', '2025-05-16 20:24:47', 1),
+(13, 4, 'CAPACITACIÓN', '10', '2025-07-20', '2025-07-28', '2026-07-28', 1, '../../public/264659934.png', '2025-07-28 17:21:16', 1);
 
 -- --------------------------------------------------------
 
@@ -281,7 +254,7 @@ ALTER TABLE `tm_usuario`
 -- AUTO_INCREMENT de la tabla `td_curso_usuario`
 --
 ALTER TABLE `td_curso_usuario`
-  MODIFY `curd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `curd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_categoria`
@@ -299,7 +272,7 @@ ALTER TABLE `tm_certificados_especiales`
 -- AUTO_INCREMENT de la tabla `tm_curso`
 --
 ALTER TABLE `tm_curso`
-  MODIFY `cur_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `cur_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `tm_director`
