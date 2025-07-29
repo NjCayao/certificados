@@ -5,6 +5,12 @@ acceso al sistema:
 correo: admin@admin.com 
 contraseña: 1234567
 
+# para procesar QR en Xampp
+Abre el archivo php.ini de XAMPP (generalmente en C:\xampp\php\php.ini) y busca esta línea:
+ini;extension=gd
+Quita el punto y coma (;) para descomentarla:
+iniextension=gd
+
 # Proyecto de Certificados
 
 # NO ACTUALIZAR 

@@ -18,7 +18,28 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["cur_nom"];
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
-            // $sub_array[] = $row["inst_nom"]." ".$row["inst_apep"];
+
+            // Determinar el estado del certificado
+            $estado = "";
+            $fecha_actual = date('Y-m-d');
+
+            if ($row["cur_fecha_vencimiento"] != null && $row["cur_fecha_vencimiento"] != '' && $row["cur_fecha_vencimiento"] != '0000-00-00') {
+                // Tiene fecha de vencimiento
+                if ($fecha_actual <= $row["cur_fecha_vencimiento"]) {
+                    // Está vigente
+                    $fecha_formateada = date('d/m/Y', strtotime($row["cur_fecha_vencimiento"]));
+                    $estado = '<span class="badge bg-success"><i class="fa fa-check-circle"></i> Vigente hasta <br>' . $fecha_formateada . '</span>';
+                } else {
+                    // Está vencido
+                    $fecha_formateada = date('d/m/Y', strtotime($row["cur_fecha_vencimiento"]));
+                    $estado = '<span class="badge bg-danger"><i class="fa fa-times-circle"></i> Vencido desde <br>' . $fecha_formateada . '</span>';
+                }
+            } else {
+                // No tiene vencimiento
+                $estado = '<span class="badge bg-primary"><i class="fa fa-infinity"></i> Sin vencimiento</span>';
+            }
+
+            $sub_array[] = $estado;
             $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             $data[] = $sub_array;
         }
@@ -30,7 +51,6 @@ switch ($_GET["op"]) {
             "aaData" => $data
         );
         echo json_encode($results);
-
         break;
 
     /*TODO: MicroServicio para poder mostrar el listado de cursos de un usuario con certificado */
@@ -79,6 +99,7 @@ switch ($_GET["op"]) {
                 $output["cur_descrip"] = $row["cur_descrip"];
                 $output["cur_fechini"] = $row["cur_fechini"];
                 $output["cur_fechfin"] = $row["cur_fechfin"];
+                $output["cur_fecha_vencimiento"] = $row["cur_fecha_vencimiento"]; // AGREGAR ESTA LÍNEA
                 $output["cur_img"] = $row["cur_img"];
                 $output["usu_id"] = $row["usu_id"];
                 $output["usu_nom"] = $row["usu_nom"];
@@ -416,7 +437,7 @@ switch ($_GET["op"]) {
         foreach ($datos as $row) {
             $sub_array = array();
             $sub_array[] = "<input type='checkbox' name='detallecheck[]' value='" . $row["usu_id"] . "'>";
-            $sub_array[] = $row["usu_nom"]; 
+            $sub_array[] = $row["usu_nom"];
             $sub_array[] = $row["usu_apep"];
             $sub_array[] = $row["usu_apem"];
             $sub_array[] = $row["usu_correo"];

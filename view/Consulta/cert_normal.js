@@ -54,6 +54,28 @@ function inicializarCertificadosNormales(usu_id, nombreCompleto) {
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         },
+        "columnDefs": [
+            {
+                "targets": 0,
+                "className": "title-column"
+            },
+            {
+                "targets": 1,
+                "className": "date-column"
+            },
+            {
+                "targets": 2,
+                "className": "date-column"
+            },
+            {
+                "targets": 3,
+                "className": "status-column"
+            },
+            {
+                "targets": 4,
+                "className": "button-column"
+            }
+        ]
     });
     
     // Mostrar panel de certificados normales

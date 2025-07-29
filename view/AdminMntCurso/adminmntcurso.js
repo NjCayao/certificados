@@ -104,7 +104,28 @@ function editar(cur_id){
         $('#cur_descrip').val(data.cur_descrip);
         $('#cur_fechini').val(data.cur_fechini);
         $('#cur_fechfin').val(data.cur_fechfin);
-        $('#inst_id').val(data.inst_id).trigger('change');1
+        $('#inst_id').val(data.inst_id).trigger('change');
+        
+        // Manejar fecha de vencimiento
+        if(data.cur_fecha_vencimiento != null && data.cur_fecha_vencimiento != '' && data.cur_fecha_vencimiento != '0000-00-00') {
+            $('#tiene_vencimiento').val('si').trigger('change');
+            $('#cur_fecha_vencimiento').val(data.cur_fecha_vencimiento);
+            
+            // Calcular años de vigencia
+            var fechaFin = new Date(data.cur_fechfin);
+            var fechaVenc = new Date(data.cur_fecha_vencimiento);
+            var anos = fechaVenc.getFullYear() - fechaFin.getFullYear();
+            
+            // Ajustar si el mes/día de vencimiento es anterior al mes/día de fin
+            if (fechaVenc.getMonth() < fechaFin.getMonth() || 
+                (fechaVenc.getMonth() === fechaFin.getMonth() && fechaVenc.getDate() < fechaFin.getDate())) {
+                anos--;
+            }
+            
+            $('#vigencia_anos').val(anos > 0 ? anos : 1);
+        } else {
+            $('#tiene_vencimiento').val('no').trigger('change');
+        }
     });
     $('#lbltitulo').html('Editar Registro');
     $('#modalmantenimiento').modal('show');
@@ -142,6 +163,13 @@ function imagen(cur_id){
 function nuevo(){
     $('#lbltitulo').html('Nuevo Registro');
     $('#cursos_form')[0].reset();
+    
+    // Resetear campos de vencimiento
+    $('#tiene_vencimiento').val('no');
+    $('#div_vigencia').hide();
+    $('#div_fecha_vencimiento').hide();
+    $('#cur_fecha_vencimiento').val('');
+    
     combo_categoria();
     combo_instructor();
     $('#modalmantenimiento').modal('show');

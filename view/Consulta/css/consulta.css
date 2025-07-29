@@ -668,3 +668,79 @@
           font-size: 0.8rem;
         }
       }
+
+/* Estilos para badges de estado */
+.status-column {
+  text-align: center;
+}
+
+.badge {
+  padding: 0.35em 0.8em;
+  font-size: 0.85em;
+  font-weight: 500;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.badge i {
+  font-size: 0.9em;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+.bg-primary {
+  background-color: #007bff !important;
+  color: white !important;
+}
+
+/* Ajuste de columnas para tabla con estado */
+#cursos_data th:nth-child(1), 
+#cursos_data td:nth-child(1) {
+  width: 35% !important;
+}
+
+#cursos_data th:nth-child(2), 
+#cursos_data td:nth-child(2) {
+  width: 15% !important;
+}
+
+#cursos_data th:nth-child(3), 
+#cursos_data td:nth-child(3) {
+  width: 15% !important;
+}
+
+#cursos_data th:nth-child(4), 
+#cursos_data td:nth-child(4) {
+  width: 25% !important;
+  text-align: center;
+}
+
+#cursos_data th:nth-child(5), 
+#cursos_data td:nth-child(5) {
+  width: 10% !important;
+  text-align: center;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .badge {
+    font-size: 0.75em;
+    padding: 0.25em 0.6em;
+  }
+  
+  #cursos_data th:nth-child(4), 
+  #cursos_data td:nth-child(4) {
+    width: 30% !important;
+  }
+}

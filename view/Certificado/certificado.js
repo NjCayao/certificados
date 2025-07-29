@@ -184,30 +184,65 @@ if (cursoWidth > maxWidth) {
 
 
 
-
-            ctx.font = '45px Arial';
-            ctx.fillText('Lima, ' + formatFecha(fecha) + ' ', 3000, 1680); 
+            // sección de fechas del certificado:
+            ctx.font = '45px Arial';            
             function formatFecha(fecha) {
-                if (!fecha || isNaN(fecha.getTime())) {
-                    return ''; // o cualquier otro valor predeterminado
-                }
-            
-                var meses = [
-                    "enero", "febrero", "marzo", "abril", "mayo", "junio",
-                    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
-                ];
-            
-                var dia = fecha.getDate();
-                var mes = fecha.getMonth() + 1;
-                var anio = fecha.getFullYear();
-            
-                // Asegúrate de que mes tenga dos dígitos
-                if (mes < 10) {
-                    mes = '0' + mes;
-                }
-            
-                return dia + ' de ' + meses[mes - 1] + ' del ' + anio;
+            if (!fecha || isNaN(fecha.getTime())) {
+                return ''; // o cualquier otro valor predeterminado
             }
+
+            var meses = [
+                "enero", "febrero", "marzo", "abril", "mayo", "junio",
+                "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+            ];
+
+            var dia = fecha.getDate();
+            var mes = fecha.getMonth();
+            var anio = fecha.getFullYear();
+
+            return dia + ' de ' + meses[mes] + ' del ' + anio;
+        }
+        
+        // Verificar si tiene fecha de vencimiento
+        if(data.cur_fecha_vencimiento != null && data.cur_fecha_vencimiento != '' && data.cur_fecha_vencimiento != '0000-00-00'){
+            // CON FECHA DE VENCIMIENTO: Formato detallado
+            
+            // Lugar
+            ctx.font = '50px Arial';
+            ctx.fillStyle = '#000000';
+            ctx.fillText('Lima, Perú', 320, 1650);
+
+            // Fecha de emisión
+            ctx.font = 'italic 40px Arial';
+            ctx.fillStyle = '#666666';
+            ctx.fillText('Fecha de emisión:', 320, 1720);
+
+            ctx.font = 'bold 45px Arial';
+            ctx.fillStyle = '#000000';
+            ctx.fillText(formatFecha(fecha), 320, 1770);
+
+            // Fecha de vencimiento
+            var fechaVencimiento = new Date(data.cur_fecha_vencimiento + 'T00:00:00');
+            fechaVencimiento.setDate(fechaVencimiento.getDate() + 1);
+            
+            ctx.font = 'italic 40px Arial';
+            ctx.fillStyle = '#666666';
+            ctx.fillText('Fecha de vencimiento:', 320, 1840);
+            
+            ctx.font = 'bold 45px Arial';
+            ctx.fillStyle = '#000000';
+            ctx.fillText(formatFecha(fechaVencimiento), 320, 1890);
+            ctx.fillStyle = '#000000';
+            
+        } else {
+            // SIN FECHA DE VENCIMIENTO: Formato tradicional simple
+            ctx.font = '45px Arial';
+            ctx.fillStyle = '#000000';
+            ctx.fillText(formatFecha(fecha), 320, 1680);
+            ctx.font = '50px Arial';
+            ctx.fillStyle = '#000000';
+            ctx.fillText('Lima, Perú', 320, 1650);
+        }
 
             
 
